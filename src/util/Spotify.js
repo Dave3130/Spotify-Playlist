@@ -1,5 +1,5 @@
 
-const redirectUri = 'https://spotify-playlist-8y0x48ft6.vercel.app/';
+const redirectUri = 'https://spotify-playlist.dave3130.vercel.app/';
 let accessToken;
 
 const Spotify = {
