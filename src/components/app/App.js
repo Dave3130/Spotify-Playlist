@@ -5,6 +5,7 @@ import SearchResults from '../searchresults/searchresults';
 import Playlist from '../playlist/playlist';
 
 import Spotify from '../../util/Spotify';
+require('dotenv').config()
 
 class App extends React.Component {
 
@@ -63,7 +64,10 @@ class App extends React.Component {
     return (
       <div>
         
-        <h1>Spot<span className="highlight">ify Play</span>list <img src={require('./spotify.png')} /> </h1>
+        <div className="header">
+        <h1 className="head-title">Spot<span className="highlight">ify Play</span>list <img src={require('./spotify.png')} alt="spotify-logo"/></h1>
+          <button className="auth-btn" onClick={()=>{Spotify.getAccessToken()}} >Authenticate on Spotify</button>
+        </div>
         <div className="App">
           <SearchBar onSearch={this.search}/>
           <div className="App-playlist">
@@ -76,7 +80,7 @@ class App extends React.Component {
                       onSave={this.savePlaylist}/>
           </div>
         </div>
-        <p className="footer"><a href={"https://github.com/Dave3130"} target={"_blank"}><i className="fab fa-github"></i></a> &nbsp; Jaydeep Dave &nbsp; <a href={"https://www.linkedin.com/in/dave-jaydeep/"} target={"_blank"}><i className="fab fa-linkedin-in"></i></a></p>
+        <p className="footer"><a href={"https://github.com/Dave3130"} rel={"noopener noreferrer"} target={"_blank"}><i className="fab fa-github"></i></a> &nbsp; Jaydeep Dave &nbsp; <a href={"https://www.linkedin.com/in/dave-jaydeep/"} target={"_blank"}><i className="fab fa-linkedin-in"></i></a></p>
         
       </div>
     );

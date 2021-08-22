@@ -43,7 +43,7 @@ class SearchBar extends React.Component {
                 onChange={this.handleTermChange}
                 onKeyPress={this.handleKeyPress} />
                 <p style={{ marginTop: "-1.5rem", paddingBottom: ".5rem", fontSize: "0.7rem", color: "red", fontWeight: "800"}}>{this.state.error}</p>
-        <a  className="SearchButton" onClick={this.search}>SEARCH</a>
+        <button  className="SearchButton" onClick={this.search}>SEARCH</button>
       </div>
     );
   }

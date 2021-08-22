@@ -1,5 +1,4 @@
-
-const redirectUri = 'https://spotify-playlist.dave3130.vercel.app/';
+const redirectUri = 'https://spotify-playlist-dave3130.vercel.app/';
 let accessToken;
 
 const Spotify = {
@@ -18,6 +17,7 @@ const Spotify = {
             window.history.pushState('Access Token', null, '/');
             return accessToken;
         } else {
+            console.log(redirectUri);
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
             window.location = accessUrl;
         }

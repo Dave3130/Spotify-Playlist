@@ -3,26 +3,42 @@ html {
   font-size: 18px;
 }
 
-h1 {
-  margin-top: 0px;
-    margin-bottom: 0px;
-  padding: .77rem 0;
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: .25rem 0;
   background-color: crimson;
-  text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 1.88rem;
+  
   color: white;
 }
-
-h1 .highlight {
+h1{
+  font-size: 1.88rem;
+  justify-content: center;
+}
+.header.highlight {
   color: black;
 }
 
-h1 img{
-    width: 3%;
+.header img{
+    width: 2rem;
     vertical-align: middle;
 }
 
+.auth-btn{
+  justify-content: flex-end;
+  cursor: pointer;
+  padding: .77rem .77rem;
+  border-radius: 54px;
+  border-width: 0px;
+  background-color: #000;
+  font-size: .9rem;
+  transition: background-color .25s;
+  color: #fff;
+  font-weight: 500;
+}
 h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 1.55rem;
