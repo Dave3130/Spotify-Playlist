@@ -39,6 +39,7 @@ h1{
   color: #fff;
   font-weight: 500;
 }
+
 h2 {
   font-family: 'Poppins', sans-serif;
   font-size: 1.55rem;
@@ -73,10 +74,14 @@ h2 {
 .App{
   background-image: url('./background_photo_mobile.jpg');  
     }
-    h1 img{
-        width: 12%;
-        vertical-align: middle;
-    }
+  h1 img{
+      width: 12%;
+      vertical-align: middle;
+  }
+  .auth-btn{
+    margin-bottom: 5px;
+  }
+
 } 
 .footer{
   padding: .77rem 0;

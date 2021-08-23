@@ -14,14 +14,14 @@ class SearchBar extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
   
-  // Sets the argument for the seearch method in App.js to the state of term
+  // Sets the argument for the search method in App.js to the state of term
   search() {
-    if(this.state.error === ''){
+    if(this.state.term === ''){
        this.setState({ error: 'Serch field can\'t be empty' }); 
     }
     else{
         this.setState({ error: "" }); 
-        this.props.onSearch(this.state.term);
+        this.props.onSearch(this.state.term)
     }
   }
   

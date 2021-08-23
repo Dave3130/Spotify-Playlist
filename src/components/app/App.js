@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = { 
       searchResults: [],
-      playlistName: 'New Playlist',
+      playlistName: 'Playlist Name',
       playlistTracks: []
     }
     this.addTrack = this.addTrack.bind(this);
@@ -54,7 +54,7 @@ class App extends React.Component {
     const trackURIs = this.state.playlistTracks.map(track => track.uri);
     Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
       this.setState({
-        playlistName: 'New Playlist',
+        playlistName: 'Playlist Name',
         playlistTracks: []
       });
     });
@@ -66,7 +66,7 @@ class App extends React.Component {
         
         <div className="header">
         <h1 className="head-title">Spot<span className="highlight">ify Play</span>list <img src={require('./spotify.png')} alt="spotify-logo"/></h1>
-          <button className="auth-btn" onClick={()=>{Spotify.getAccessToken()}} >Authenticate on Spotify</button>
+          <button className= "auth-btn" onClick={()=>{Spotify.getAccessToken()}} >Authenticate on Spotify</button>
         </div>
         <div className="App">
           <SearchBar onSearch={this.search}/>

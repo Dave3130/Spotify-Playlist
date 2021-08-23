@@ -1,12 +1,26 @@
-const redirectUri = 'https://spotify-playlist-dave3130.vercel.app/';
+import Swal from 'sweetalert2';
+//change redirectURi to your application url
+const redirectUri = 'http://localhost:3000/';
 let accessToken;
 
 const Spotify = {
 
     // Gets access token from Spotify
-    getAccessToken() {
+    getAccessToken(query) {
         if(accessToken) {
-            return accessToken;
+            if(query !== 'search'){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Wait...',
+                    text: 'You are already logged In !!',
+                  })
+                return null;
+            }
+            else{
+                return accessToken;
+            }
+            
+            
         }
         const hasAccessToken = window.location.href.match(/access_token=([^&]*)/);
         const hasExpiresIn = window.location.href.match(/expires_in=([^&]*)/);
@@ -15,19 +29,25 @@ const Spotify = {
             const expiresIn = Number(hasExpiresIn[1]);
             window.setTimeout(() => accessToken = '', expiresIn * 1000);
             window.history.pushState('Access Token', null, '/');
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Your session starts now !!',
+              })
             return accessToken;
         } else {
-            console.log(redirectUri);
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
             window.location = accessUrl;
+            
         }
+        
     },
 
     
     
     // Uses access token to return a response from the Spoitify API using user serach term from SearchBar
     search(term) {
-        const accessToken = Spotify.getAccessToken();
+        const accessToken = Spotify.getAccessToken('search');
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -37,7 +57,11 @@ const Spotify = {
                 if (response.ok) {
                     return response.json();
                 } else {
-                    console.log('API request failed');
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'API request failed !!',
+                    })
                 }
         }).then(
             jsonResponse => {
@@ -61,7 +85,9 @@ const Spotify = {
         if (!playlistName || !trackURIs.length) {
             return;
         }
-        const accessToken = Spotify.getAccessToken();
+        if(accessToken === null){
+            const accessToken = Spotify.getAccessToken();
+        }
         const headers = {
             Authorization: `Bearer ${accessToken}`
         };
@@ -75,6 +101,13 @@ const Spotify = {
                 if(response.ok) {
                     return response.json();
                 } 
+                else{
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'API request failed !!',
+                    })
+                }
         }).then(
             jsonResponse => {
                 userId = jsonResponse.id;
@@ -89,12 +122,20 @@ const Spotify = {
                     if (response.ok) {
                         return response.json();
                     } else {
-                        console.log('API request failed');
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'API request failed !!',
+                        })
                     }
                 }).then(
                     jsonResponse => {
                         const playlistId = jsonResponse.id;
-
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Your playlist is saved !!',
+                          })
                         // Adds tracks to new playlist 
                         return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
                             headers: headers,
@@ -102,6 +143,7 @@ const Spotify = {
                             body: JSON.stringify({ uris: trackURIs})
                         });
                     });
+                    
             });
     }
 }
